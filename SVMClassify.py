@@ -95,12 +95,14 @@ class ClassifySVM:
                 print('Step #' + str(i + 1) + ' A = ' + str(sess.run(A)) + ' b = ' + str(sess.run(b)))
                 print('Loss = ' + str(temp_loss))
                 
+        print(max(test_accuracy))
         test_prediction = sess.run(prediction, feed_dict={x_data:Beta_test, y_target:np.transpose([target_test])})
         c = Confusion()
         c.plot_confusion_matrix(target_test, test_prediction, normalize=True,
                         title='Normalized confusion matrix')
         c.plot_confusion_matrix(target_test, test_prediction, normalize=False,
                         title='Confusion matrix')
+        plt.show()
 
         # Plotting the outputs (fit, loss and accuracy), the coefficients.
         [[a1], [a2]] = sess.run(A)
